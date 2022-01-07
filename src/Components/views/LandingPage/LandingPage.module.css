@@ -1,0 +1,37 @@
+.landingpage {
+    width: 100%;
+    margin: 0;
+}
+
+.container {
+    width: 85%;
+    margin: 1rem auto;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+}
+
+.cardSection {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 10px;
+}
+
+td, th {
+    border: 1px solid rgb(194, 194, 194);
+    text-align: center;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}

@@ -1,0 +1,12 @@
+.replycount {
+    font-size: 12px;
+    color: gray;
+    margin-left: 53px;
+    cursor: pointer;
+}
+
+.replysection {
+    width: 80%;
+    margin-left: 40px;
+    height: 100%;
+}

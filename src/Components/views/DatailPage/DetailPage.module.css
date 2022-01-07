@@ -1,0 +1,54 @@
+.contents {
+    width: 85%;
+    margin: 1rem auto;
+}
+
+.actors {
+    display: flex;
+    justify-content: center;
+    margin: 2rem;
+}
+
+.mainimage {
+    position: absolute;
+    max-width: 500px;
+    bottom: 2rem;
+    margin-left: 2rem;
+}
+
+.description {
+    color: white;
+    font-size: 1rem;
+}
+
+.title {
+    color: white;
+}
+
+.button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.comment {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.likedislike {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-right: 15px;
+}
+
+.cardSection {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.showActorsBtn {
+    width: 150px;
+    height: 25px;
+}

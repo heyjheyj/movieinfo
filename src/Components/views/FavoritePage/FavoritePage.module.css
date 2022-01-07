@@ -1,0 +1,14 @@
+.favorite {
+    width: 85%;
+    margin: 1rem auto;
+}
+
+.favorite > hr {
+    margin-top: 10px;
+}
+
+
+
+.movieImages {
+    width: 150px;
+}

@@ -1,0 +1,44 @@
+.registerPage {
+    height: 100vh;
+  }
+
+.registerform {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding-top: 50px;
+    margin: auto;
+    height: 400px;
+    justify-content: space-between;
+    max-width: 300px;
+}
+
+.inputfield {
+    display: flex;
+    flex-direction: column;
+}
+.registerform input {
+    height: 30px;
+    font-size: 15px;
+}
+
+.registerform input[type=submit] {
+    background-color: #219E2B;
+    color: white;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    height: 35px;
+}
+
+.registerform input[type=submit]:hover {
+    opacity: 0.8;
+    border: none;
+    cursor: pointer;
+    height: 35px;
+}
+
+.registerform p {
+    color: #FF245E;
+    font-size: 10px;
+}
