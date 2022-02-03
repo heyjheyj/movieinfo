@@ -2,53 +2,63 @@ import React, { useState, useEffect } from "react";
 import styles from "./LandingPage.module.css";
 import { API_KEY, API_URL, IMAGE_DATA_URL } from "../../../config";
 
-import useIntersect from "./section/Loading";
-
 import GridCards from "../../common/gridcards";
 import MainImage from "./section/MainImage";
 import { useCallback } from "react";
+import { useRef } from "react";
 
 const LandingPage = props => {
   const [movies, setMovies] = useState([]);
   const [mainMovie, setMainMovie] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  const end = useRef();
 
   const [currentPage, setCurrentPage] = useState(1);
 
   const fetchApi = useCallback(
-    async () => {
+    async page => {
       console.log(currentPage);
-      const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${currentPage}`;
+      const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
       await fetch(endpoint).then(response => response.json()).then(res => {
         const list = res.results;
         console.log(list);
         console.log(list[0]);
         setMovies([...movies, ...list]);
         setMainMovie(list[0]);
+        setLoading(true);
       });
     },
     [currentPage]
   );
 
-  useEffect(() => {
-    fetchApi();
+  useEffect(
+    () => {
+      fetchApi(currentPage);
+    },
+    [currentPage]
+  );
+
+  useEffect(
+    () => {
+      if (loading) {
+        const observer = new IntersectionObserver(
+          entries => {
+            if (entries[0].isIntersecting) {
+              loadMore();
+            }
+          },
+          { threshold: 1 }
+        );
+        observer.observe(end.current);
+      }
+    },
+    [loading]
+  );
+
+  const loadMore = () => {
     setCurrentPage(prev => prev + 1);
-  }, []);
-
-  const [_, setRef] = useIntersect(async (entry, observer) => {
-    observer.unobserve(entry.target);
-    await fetchApi();
-    setCurrentPage(prev => prev + 1);
-    observer.observe(entry.target);
-  }, {});
-
-  // const { currentPage, isLoading } = state;
-  // if (!currentPage) return null;
-
-  // const loadMore = () => {
-  //   const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${currentPage +
-  //     1}`;
-  //   fetchApi(endpoint);
-  // };
+  };
 
   return (
     <section className={styles.landingpage}>
@@ -78,7 +88,7 @@ const LandingPage = props => {
             )}
         </section>
       </div>
-      <div className={styles.loading} ref={setRef} />
+      <div className={styles.loading} ref={end} />
     </section>
   );
 };

@@ -3,7 +3,6 @@ import styles from "./MainImage.module.css";
 
 const MainImage = ({ image, title, overview }) => {
   const imageUrl = image;
-  // console.log(imageUrl);
 
   return (
     <div

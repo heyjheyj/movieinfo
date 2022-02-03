@@ -1,36 +1,27 @@
-import React, { Fragment } from "react";
-import { useState } from 'react';
+import React, { Fragment, useState } from "react";
 import styles from "./comment.module.css";
 import Axios from 'axios';
-import { useEffect } from 'react';
+
 import { useSelector } from 'react-redux';
+
 import SingleComment from './singleComment';
 import ReplyComment from './replyComment';
 import { useNavigate } from 'react-router-dom'
 
 const Comment = ({ movie, comments, refreshFunction }) => {
   console.log(comments)
+
   const [ commentvalue, setCommentvalue ] = useState("")
   const user = useSelector(state => state.user.userData)
   console.log(user)
+
   let postId = movie.id
 
   const navigate = useNavigate()
-  // console.log(localStorage.getItem('userId'));
 
   const onHandleClick = (e) => {
     setCommentvalue(e.currentTarget.value)
   }
-
-  const readDB = () => {
-    return;
-    // Axios.get('/api/comment/')
-  }
-
-
-  useEffect(() => {
-    // readDB()
-  }, [])
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -56,9 +47,9 @@ const Comment = ({ movie, comments, refreshFunction }) => {
 
   return (
     <>
-      <br />
-      <p>Comments</p>
+      <p className={styles.commentsTitle}>Comments</p>
       <hr />
+
       {/*  Comment Lists */}
       {comments && comments.map((comment, index) => (
         (!comment.responseTo ?
@@ -76,13 +67,14 @@ const Comment = ({ movie, comments, refreshFunction }) => {
             postId={postId} 
           />
         </Fragment> : "")))}
+
       {/* Root Comment Form */}
       <form className={styles.commentform} onSubmit={onSubmit}>
         <textarea
           className={styles.commentInput}
           onChange={onHandleClick}
           value={commentvalue}
-          placeholder="코멘트를 작성해주세요"
+          placeholder="영화에 대한 의견을 남겨주세요."
         />
         <br />
         <button className={styles.commentBtn} onClick={onSubmit}>

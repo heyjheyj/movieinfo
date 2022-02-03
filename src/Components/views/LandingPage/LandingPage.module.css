@@ -35,3 +35,8 @@ td, th {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
+
+
+.loading {
+    height: 500px;
+}

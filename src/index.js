@@ -6,7 +6,6 @@ import reportWebVitals from "./reportWebVitals";
 
 import { BrowserRouter } from "react-router-dom";
 
-import Reducer from "./redux/reducer";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import promiseMiddleware from "redux-promise";

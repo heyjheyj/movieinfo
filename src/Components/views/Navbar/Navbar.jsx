@@ -25,7 +25,7 @@ const Navbar = props => {
       if (res.payload.success) {
         console.log(res.payload.userInfo)
         localStorage.removeItem('userId')
-        navigate("/");
+        window.location.replace("/");
       } else {
         alert("fail to logout");
       }

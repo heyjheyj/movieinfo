@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./DetailPage.module.css";
 import { API_KEY, API_URL, IMAGE_DATA_URL } from "../../../config";
 
@@ -12,6 +12,7 @@ import GridCards from "../../common/gridcards";
 
 import Comment from '../../common/Comment/comment'
 import Likedislike from '../../common/LikeDislike/likedislike'
+
 
 const DetailPage = props => {
   let params = useParams()
@@ -58,8 +59,8 @@ const DetailPage = props => {
   }
 
   const refreshFunction = (newComment) => {
-    // setComments(...comments, newComment);
     setComments(comments.concat(newComment))
+    window.location.reload();
   }
 
   const actorToggle = () => {
@@ -72,20 +73,21 @@ const DetailPage = props => {
     getAllComments()
   }, []);
 
-  return (<>
-      <MainImage 
-        image={`${IMAGE_DATA_URL}original${movieInfo.backdrop_path}`}
-        title={movieInfo.original_title}
-        overview={movieInfo.overview}
+  return (
+  <>
+    <MainImage 
+      image={`${IMAGE_DATA_URL}original${movieInfo.backdrop_path}`}
+      title={movieInfo.original_title}
+      overview={movieInfo.overview}
     />
 
-<section className={styles.contents}>
-    <div className={styles.button}>
-      <div className={styles.likedislike}>
-        <Likedislike movie movieId={movieId} userId={localStorage.getItem('userId')}/>
+    <section className={styles.contents}>
+      <div className={styles.button}>
+        <div className={styles.likedislike}>
+          <Likedislike movie movieId={movieId} userId={localStorage.getItem('userId')}/>
+        </div>
+          <FavoriteBtn movieInfo={movieInfo} movieId={movieId} userfrom={localStorage.getItem('userId')}/>
       </div>
-      <FavoriteBtn movieInfo={movieInfo} movieId={movieId} userfrom={localStorage.getItem('userId')}/>
-    </div>
         <MovieInfo movie={movieInfo} />
         <div className={styles.comment}>
           <Comment refreshFunction={refreshFunction} comments={comments} movie={movieInfo} />
@@ -95,25 +97,25 @@ const DetailPage = props => {
     <br />
 
     <section className={styles.actors}>
-        <button className={styles.showActorsBtn} onClick={actorToggle}>Toggle Actor view</button>
+      <button className={styles.showActorsBtn} onClick={actorToggle}>Toggle Actor view</button>
     </section>
 
     <section className={styles.cardSection}>
-    {showActors && 
-          movieCrew &&
-            movieCrew.map((actor, index) =>
-                <GridCards
-                  key={index}
-                  image={
-                    actor.profile_path
-                      ? `${IMAGE_DATA_URL}w500${actor.profile_path}`
-                      : null
-                  }
-                  actorName={actor.name}
-                />
-            )}
+
+      {showActors && 
+            movieCrew &&
+              movieCrew.map((actor, index) =>
+                  <GridCards
+                    key={index}
+                    image={
+                      actor.profile_path
+                        ? `${IMAGE_DATA_URL}w500${actor.profile_path}`
+                        : null
+                    }
+                    actorName={actor.name}
+                  />)}
     </section>
-    </>)
+  </>)
 };
 
 export default DetailPage;
